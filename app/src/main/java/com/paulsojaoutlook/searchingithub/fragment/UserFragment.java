@@ -3,12 +3,15 @@ package com.paulsojaoutlook.searchingithub.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.paulsojaoutlook.searchingithub.R;
 import com.paulsojaoutlook.searchingithub.model.GitHubUser;
@@ -24,7 +27,9 @@ import retrofit2.Response;
  * Created by p-sha on 04.10.2017.
  */
 
-public class UserFragment extends Fragment {
+public class UserFragment extends Fragment implements View.OnClickListener{
+
+    public static final String KEY_USERNAME = "username";
 
     private ImageView imageView;
     private TextView usernameText;
@@ -52,21 +57,20 @@ public class UserFragment extends Fragment {
         userReposBtn = root.findViewById(R.id.UserReposBtn);
 
         Bundle bundle = getArguments();
-        username = bundle.getString(SearchFragment.KEY_USERNAME);
+        username = bundle.getString(SearchFragment.KEY_SEARCH_USERNAME);
 
         loadData();
+
+        userReposBtn.setOnClickListener(this);
 
         return root;
     }
 
     private void loadData() {
-        //подключаемся по url
         final GitHubUserCall apiService = GitHubApiClient.getClient().create(GitHubUserCall.class);
-        //передаём username
         Call<GitHubUser> call = apiService.getUser(username);
         call.enqueue(new Callback<GitHubUser>() {
             @Override
-            //здесь пишем что делать с найденной информацией на сервере
             public void onResponse(Call<GitHubUser> call, Response<GitHubUser> response) {
                 usernameText.setText("Username: " + response.body().getUserName());
                 userFollowersText.setText("Followers: " + response.body().getUserFollowers());
@@ -82,10 +86,22 @@ public class UserFragment extends Fragment {
             }
 
             @Override
-            //здесь если инфы нет на сервере
             public void onFailure(Call<GitHubUser> call, Throwable t) {
-
+                Toast.makeText(getContext(), "no data on server", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        RepoFragment repoFragment = new RepoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_USERNAME, username);
+        repoFragment.setArguments(bundle);
+        fragmentTransaction.remove(getFragmentManager().findFragmentById(R.id.SearchFragmentContainer));
+        fragmentTransaction.replace(R.id.UserFragmentContainer, repoFragment);
+        fragmentTransaction.commit();
     }
 }

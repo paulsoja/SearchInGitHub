@@ -19,7 +19,7 @@ import com.paulsojaoutlook.searchingithub.R;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
 
-    public static final String KEY_USERNAME = "username";
+    public static final String KEY_SEARCH_USERNAME = "username";
 
     private String username;
     private EditText editText;
@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         UserFragment userFragment = new UserFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_USERNAME, username);
+        bundle.putString(KEY_SEARCH_USERNAME, username);
         userFragment.setArguments(bundle);
         fragmentTransaction.add(R.id.UserFragmentContainer, userFragment);
         fragmentTransaction.commit();
