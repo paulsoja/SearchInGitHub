@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     private TextView userEmailText;
     private TextView userReposText;
     private Button userReposBtn;
+    private ProgressBar progressBar;
 
     private String username;
 
@@ -55,6 +57,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         userEmailText = root.findViewById(R.id.UserEmail);
         userReposText = root.findViewById(R.id.UserRepos);
         userReposBtn = root.findViewById(R.id.UserReposBtn);
+        progressBar = root.findViewById(R.id.progressBar);
 
         Bundle bundle = getArguments();
         username = bundle.getString(SearchFragment.KEY_SEARCH_USERNAME);
@@ -67,6 +70,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     }
 
     private void loadData() {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
         final GitHubUserCall apiService = GitHubApiClient.getClient().create(GitHubUserCall.class);
         Call<GitHubUser> call = apiService.getUser(username);
         call.enqueue(new Callback<GitHubUser>() {
@@ -83,6 +87,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                 }
                 userReposText.setText("Your repositories: " + response.body().getUserRepos());
                 Picasso.with(getContext()).load(response.body().getUserAvatar()).resize(220, 220).into(imageView);
+                progressBar.setVisibility(ProgressBar.GONE);
             }
 
             @Override

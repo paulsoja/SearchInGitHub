@@ -1,5 +1,8 @@
 package com.paulsojaoutlook.searchingithub.fragment;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.paulsojaoutlook.searchingithub.R;
 
@@ -37,15 +41,26 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        username = editText.getText().toString();
+        if (isInternetConnected(getContext())) {
+            username = editText.getText().toString();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        UserFragment userFragment = new UserFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_SEARCH_USERNAME, username);
-        userFragment.setArguments(bundle);
-        fragmentTransaction.add(R.id.UserFragmentContainer, userFragment);
-        fragmentTransaction.commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            UserFragment userFragment = new UserFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(KEY_SEARCH_USERNAME, username);
+            userFragment.setArguments(bundle);
+            fragmentTransaction.add(R.id.UserFragmentContainer, userFragment);
+            fragmentTransaction.commit();
+        } else {
+            Toast.makeText(getContext(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
+
+    public static boolean isInternetConnected(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }
