@@ -50,7 +50,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             Bundle bundle = new Bundle();
             bundle.putString(KEY_SEARCH_USERNAME, username);
             userFragment.setArguments(bundle);
-            fragmentTransaction.add(R.id.UserFragmentContainer, userFragment);
+            fragmentTransaction.replace(R.id.UserFragmentContainer, userFragment);
+            fragmentTransaction.addToBackStack("searchfragment");
             fragmentTransaction.commit();
         } else {
             Toast.makeText(getContext(), "No Internet Connection!", Toast.LENGTH_SHORT).show();

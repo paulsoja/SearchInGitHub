@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ import retrofit2.Response;
 
 public class RepoFragment extends Fragment {
 
+    private ProgressBar progressBar;
+
     private List<GitHubRepo> repoList;
     private String username;
     private RepoAdapter adapter;
@@ -41,6 +44,7 @@ public class RepoFragment extends Fragment {
 
         TextView userNameText = root.findViewById(R.id.RepoFragment_Username_Text);
         ListView listRepo = root.findViewById(R.id.RepoFragment_userRepo_ListView);
+        progressBar = root.findViewById(R.id.progressBar_repoInfo);
 
         Bundle bundle = getArguments();
         username = bundle.getString(UserFragment.KEY_USERNAME);
@@ -56,6 +60,7 @@ public class RepoFragment extends Fragment {
     }
 
     private void loadRepositiries() {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
         GitHubRepoCall apiService = GitHubApiClient.getClient().create(GitHubRepoCall.class);
         Call<List<GitHubRepo>> call = apiService.getRepo(username);
         call.enqueue(new Callback<List<GitHubRepo>>() {
@@ -64,6 +69,7 @@ public class RepoFragment extends Fragment {
                 repoList.clear();
                 repoList.addAll(response.body());
                 adapter.notifyDataSetChanged();
+                progressBar.setVisibility(ProgressBar.GONE);
             }
 
             @Override

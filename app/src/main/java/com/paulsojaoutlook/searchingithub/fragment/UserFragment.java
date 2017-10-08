@@ -57,7 +57,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         userEmailText = root.findViewById(R.id.UserEmail);
         userReposText = root.findViewById(R.id.UserRepos);
         userReposBtn = root.findViewById(R.id.UserReposBtn);
-        progressBar = root.findViewById(R.id.progressBar);
+        progressBar = root.findViewById(R.id.progressBar_userInfo);
 
         Bundle bundle = getArguments();
         username = bundle.getString(SearchFragment.KEY_SEARCH_USERNAME);
@@ -107,6 +107,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         repoFragment.setArguments(bundle);
         fragmentTransaction.remove(getFragmentManager().findFragmentById(R.id.SearchFragmentContainer));
         fragmentTransaction.replace(R.id.UserFragmentContainer, repoFragment);
+        fragmentTransaction.addToBackStack("userfragment");
         fragmentTransaction.commit();
     }
 }
