@@ -8,36 +8,22 @@ import com.google.gson.annotations.SerializedName;
 
 public class GitHubUser {
 
-    @SerializedName("login")
-    private String userLogin;
     @SerializedName("name")
     private String userName;
-    @SerializedName("followers")
-    private String userFollowers;
-    @SerializedName("following")
-    private String userFollowing;
+    @SerializedName("location")
+    private String userLocation;
     @SerializedName("avatar_url")
     private String userAvatar;
-    @SerializedName("email")
-    private String userEmail;
+    @SerializedName("blog")
+    private String userBlog;
     @SerializedName("public_repos")
     private String userRepos;
 
-    public GitHubUser(String userLogin, String userName, String userFollowers, String userFollowing, String userAvatar, String userEmail) {
-        this.userLogin = userLogin;
+    public GitHubUser(String userName, String userLocation, String userAvatar, String userBlog) {
         this.userName = userName;
-        this.userFollowers = userFollowers;
-        this.userFollowing = userFollowing;
+        this.userLocation = userLocation;
         this.userAvatar = userAvatar;
-        this.userEmail = userEmail;
-    }
-
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+        this.userBlog = userBlog;
     }
 
     public String getUserName() {
@@ -48,20 +34,12 @@ public class GitHubUser {
         this.userName = userName;
     }
 
-    public String getUserFollowers() {
-        return userFollowers;
+    public String getUserLocation() {
+        return userLocation;
     }
 
-    public void setUserFollowers(String userFollowers) {
-        this.userFollowers = userFollowers;
-    }
-
-    public String getUserFollowing() {
-        return userFollowing;
-    }
-
-    public void setUserFollowing(String userFollowing) {
-        this.userFollowing = userFollowing;
+    public void setUserLocation(String userLocation) {
+        this.userLocation = userLocation;
     }
 
     public String getUserAvatar() {
@@ -72,12 +50,12 @@ public class GitHubUser {
         this.userAvatar = userAvatar;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserBlog() {
+        return userBlog;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserBlog(String userBlog) {
+        this.userBlog = userBlog;
     }
 
     public String getUserRepos() {

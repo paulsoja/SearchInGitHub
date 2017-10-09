@@ -28,21 +28,21 @@ import retrofit2.Response;
  * Created by p-sha on 04.10.2017.
  */
 
-public class UserFragment extends Fragment implements View.OnClickListener{
+public class UserFragment extends Fragment implements View.OnClickListener {
 
-    public static final String KEY_USERNAME = "username";
+    public static final String KEY_COMPANY_NAME = "username";
+    public static final String KEY_NUMBER_REPO = "number_repo";
 
     private ImageView imageView;
     private TextView usernameText;
-    private TextView userLoginText;
-    private TextView userFollowersText;
-    private TextView userFollowingText;
-    private TextView userEmailText;
-    private TextView userReposText;
+    private TextView userLocationText;
+    private TextView userBlogText;
     private Button userReposBtn;
     private ProgressBar progressBar;
 
     private String username;
+    private String companyName;
+    private String numberRepo;
 
     @Nullable
     @Override
@@ -51,11 +51,8 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         View root = inflater.inflate(R.layout.fragment_user, container, false);
         imageView = root.findViewById(R.id.UserAvatar);
         usernameText = root.findViewById(R.id.UserName);
-        userLoginText = root.findViewById(R.id.UserLogin);
-        userFollowersText = root.findViewById(R.id.UserFollowers);
-        userFollowingText = root.findViewById(R.id.UserFollowing);
-        userEmailText = root.findViewById(R.id.UserEmail);
-        userReposText = root.findViewById(R.id.UserRepos);
+        userLocationText = root.findViewById(R.id.UserLocation);
+        userBlogText = root.findViewById(R.id.UserBlog);
         userReposBtn = root.findViewById(R.id.UserReposBtn);
         progressBar = root.findViewById(R.id.progressBar_userInfo);
 
@@ -76,17 +73,12 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         call.enqueue(new Callback<GitHubUser>() {
             @Override
             public void onResponse(Call<GitHubUser> call, Response<GitHubUser> response) {
-                usernameText.setText("Username: " + response.body().getUserName());
-                userFollowersText.setText("Followers: " + response.body().getUserFollowers());
-                userFollowingText.setText("Following: " + response.body().getUserFollowing());
-                userLoginText.setText("LogIn: " + response.body().getUserLogin());
-                if (response.body().getUserEmail() == null) {
-                    userEmailText.setText("No email provided");
-                } else {
-                    userEmailText.setText("email: " + response.body().getUserEmail());
-                }
-                userReposText.setText("Your repositories: " + response.body().getUserRepos());
-                Picasso.with(getContext()).load(response.body().getUserAvatar()).resize(220, 220).into(imageView);
+                usernameText.setText(response.body().getUserName());
+                userLocationText.setText(response.body().getUserLocation());
+                userBlogText.setText(response.body().getUserBlog());
+                Picasso.with(getContext()).load(response.body().getUserAvatar()).resize(150, 150).into(imageView);
+                companyName = response.body().getUserName();
+                numberRepo = response.body().getUserRepos();
                 progressBar.setVisibility(ProgressBar.GONE);
             }
 
@@ -103,7 +95,8 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         RepoFragment repoFragment = new RepoFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_USERNAME, username);
+        bundle.putString(KEY_COMPANY_NAME, companyName);
+        bundle.putString(KEY_NUMBER_REPO, numberRepo);
         repoFragment.setArguments(bundle);
         fragmentTransaction.remove(getFragmentManager().findFragmentById(R.id.SearchFragmentContainer));
         fragmentTransaction.replace(R.id.UserFragmentContainer, repoFragment);

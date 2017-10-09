@@ -33,7 +33,7 @@ public class RepoFragment extends Fragment {
     private ProgressBar progressBar;
 
     private List<GitHubRepo> repoList;
-    private String username;
+    private String companyName;
     private RepoAdapter adapter;
 
     @Nullable
@@ -47,8 +47,9 @@ public class RepoFragment extends Fragment {
         progressBar = root.findViewById(R.id.progressBar_repoInfo);
 
         Bundle bundle = getArguments();
-        username = bundle.getString(UserFragment.KEY_USERNAME);
-        userNameText.setText(username);
+        companyName = bundle.getString(UserFragment.KEY_COMPANY_NAME);
+        String numberRepo = bundle.getString(UserFragment.KEY_NUMBER_REPO);
+        userNameText.setText(companyName + " repositories (" + numberRepo + ")");
 
         repoList = new ArrayList<>();
         adapter = new RepoAdapter(getContext(), repoList);
@@ -62,7 +63,7 @@ public class RepoFragment extends Fragment {
     private void loadRepositiries() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
         GitHubRepoCall apiService = GitHubApiClient.getClient().create(GitHubRepoCall.class);
-        Call<List<GitHubRepo>> call = apiService.getRepo(username);
+        Call<List<GitHubRepo>> call = apiService.getRepo(companyName);
         call.enqueue(new Callback<List<GitHubRepo>>() {
             @Override
             public void onResponse(Call<List<GitHubRepo>> call, Response<List<GitHubRepo>> response) {
