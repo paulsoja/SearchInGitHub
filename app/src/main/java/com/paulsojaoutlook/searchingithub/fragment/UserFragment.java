@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +34,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public static final String KEY_COMPANY_NAME = "username";
     public static final String KEY_NUMBER_REPO = "number_repo";
 
+    private RelativeLayout layout;
     private ImageView imageView;
     private TextView usernameText;
     private TextView userLocationText;
     private TextView userBlogText;
-    private Button userReposBtn;
     private ProgressBar progressBar;
 
     private String username;
@@ -49,11 +50,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View root = inflater.inflate(R.layout.fragment_user, container, false);
+        layout = root.findViewById(R.id.companyLayout);
         imageView = root.findViewById(R.id.UserAvatar);
         usernameText = root.findViewById(R.id.UserName);
         userLocationText = root.findViewById(R.id.UserLocation);
         userBlogText = root.findViewById(R.id.UserBlog);
-        userReposBtn = root.findViewById(R.id.UserReposBtn);
         progressBar = root.findViewById(R.id.progressBar_userInfo);
 
         Bundle bundle = getArguments();
@@ -61,13 +62,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
         loadData();
 
-        userReposBtn.setOnClickListener(this);
+        layout.setOnClickListener(this);
 
         return root;
     }
 
     private void loadData() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
+        layout.setVisibility(View.GONE);
         final GitHubUserCall apiService = GitHubApiClient.getClient().create(GitHubUserCall.class);
         Call<GitHubUser> call = apiService.getUser(username);
         call.enqueue(new Callback<GitHubUser>() {
@@ -80,6 +82,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 companyName = response.body().getUserName();
                 numberRepo = response.body().getUserRepos();
                 progressBar.setVisibility(ProgressBar.GONE);
+                layout.setVisibility(View.VISIBLE);
             }
 
             @Override

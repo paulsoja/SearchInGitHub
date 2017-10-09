@@ -13,10 +13,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         SearchFragment searchFragment = new SearchFragment();
-        fragmentTransaction.add(R.id.SearchFragmentContainer, searchFragment);
+        fragmentTransaction.replace(R.id.SearchFragmentContainer, searchFragment);
         fragmentTransaction.commit();
 
     }
