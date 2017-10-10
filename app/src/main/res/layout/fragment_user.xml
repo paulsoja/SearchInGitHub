@@ -1,58 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_user"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/progressBar_userInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
+        android:layout_gravity="center" />
 
-    <ImageView
-        android:id="@+id/UserAvatar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@color/colorAccent"
-        android:layout_margin="5dp"
-        android:contentDescription="@string/app_name" />
-
-    <TextView
-        android:id="@+id/UserName"
-        android:layout_toRightOf="@+id/UserAvatar"
+    <RelativeLayout
+        android:id="@+id/companyLayout"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="UserName"
-        android:layout_margin="5dp"
-        android:textSize="14sp" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/UserLocation"
-        android:layout_toRightOf="@+id/UserAvatar"
-        android:layout_below="@+id/UserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:layout_margin="5dp"
-        android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/UserAvatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:contentDescription="@string/app_name"
+            android:src="@color/colorAccent" />
 
-    <TextView
-        android:id="@+id/UserBlog"
-        android:layout_toRightOf="@+id/UserAvatar"
-        android:layout_below="@+id/UserLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Blog"
-        android:layout_margin="5dp"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/UserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/UserAvatar"
+            android:text="UserName"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/UserReposBtn"
-        android:layout_below="@+id/UserAvatar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="repositories" />
+        <TextView
+            android:id="@+id/UserLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UserName"
+            android:layout_margin="5dp"
+            android:textColor="@color/DarkGrey"
+            android:layout_toRightOf="@+id/UserAvatar"
+            android:text="Location"
+            android:textSize="14sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/UserBlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UserLocation"
+            android:layout_margin="5dp"
+            android:autoLink="web"
+            android:layout_toRightOf="@+id/UserAvatar"
+            android:text="Blog"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_margin="5dp"
+            android:layout_below="@+id/UserAvatar"
+            android:background="@color/DarkGrey"
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
