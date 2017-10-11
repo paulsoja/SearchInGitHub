@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -75,14 +74,21 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         call.enqueue(new Callback<GitHubUser>() {
             @Override
             public void onResponse(Call<GitHubUser> call, Response<GitHubUser> response) {
-                usernameText.setText(response.body().getUserName());
-                userLocationText.setText(response.body().getUserLocation());
-                userBlogText.setText(response.body().getUserBlog());
-                Picasso.with(getContext()).load(response.body().getUserAvatar()).resize(150, 150).into(imageView);
-                companyName = response.body().getUserName();
-                numberRepo = response.body().getUserRepos();
-                progressBar.setVisibility(ProgressBar.GONE);
-                layout.setVisibility(View.VISIBLE);
+                if (response.body() != null) {
+                    usernameText.setText(response.body().getUserName());
+                    userLocationText.setText(response.body().getUserLocation());
+                    userBlogText.setText(response.body().getUserBlog());
+                    Picasso.with(getContext()).load(response.body().getUserAvatar()).resize(150, 150).into(imageView);
+                    companyName = response.body().getUserName();
+                    numberRepo = response.body().getUserRepos();
+                    progressBar.setVisibility(ProgressBar.GONE);
+                    layout.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(ProgressBar.GONE);
+                    usernameText.setText("");
+                    userLocationText.setText("");
+                    userBlogText.setText("");
+                }
             }
 
             @Override
