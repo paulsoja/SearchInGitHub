@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/FindUser_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="search"/>
+
     <ProgressBar
         android:id="@+id/progressBar_userInfo"
         android:layout_width="wrap_content"
@@ -14,9 +21,9 @@
 
     <RelativeLayout
         android:id="@+id/companyLayout"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
         <ImageView
             android:id="@+id/UserAvatar"
@@ -31,10 +38,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textStyle="bold"
             android:layout_toRightOf="@+id/UserAvatar"
             android:text="UserName"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/UserLocation"
@@ -42,9 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/UserName"
             android:layout_margin="5dp"
-            android:textColor="@color/DarkGrey"
             android:layout_toRightOf="@+id/UserAvatar"
             android:text="Location"
+            android:textColor="@color/DarkGrey"
             android:textSize="14sp" />
 
         <TextView
@@ -53,17 +60,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/UserLocation"
             android:layout_margin="5dp"
-            android:autoLink="web"
             android:layout_toRightOf="@+id/UserAvatar"
+            android:autoLink="web"
             android:text="Blog"
             android:textSize="14sp" />
 
         <View
-            android:layout_margin="5dp"
-            android:layout_below="@+id/UserAvatar"
-            android:background="@color/DarkGrey"
             android:layout_width="match_parent"
-            android:layout_height="2dp" />
+            android:layout_height="2dp"
+            android:layout_below="@+id/UserAvatar"
+            android:layout_margin="5dp"
+            android:background="@color/DarkGrey" />
 
     </RelativeLayout>
 
