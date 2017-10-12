@@ -3,13 +3,13 @@ package com.paulsojaoutlook.searchingithub.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.paulsojaoutlook.searchingithub.R;
 import com.paulsojaoutlook.searchingithub.adapter.RepoAdapter;
@@ -57,6 +57,8 @@ public class RepoFragment extends Fragment {
 
         loadRepositiries();
 
+        setRetainInstance(true);
+
         return root;
     }
 
@@ -75,7 +77,7 @@ public class RepoFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GitHubRepo>> call, Throwable t) {
-                Toast.makeText(getContext(), "wrong data on server", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

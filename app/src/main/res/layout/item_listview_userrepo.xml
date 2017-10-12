@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="8dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/item_repoName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:text="company"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -17,14 +17,14 @@
         android:id="@+id/item_repoDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:text="description"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/item_repoLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test"
+        android:text="language"
         android:textSize="14sp"
         android:textStyle="italic" />
 

@@ -12,6 +12,6 @@ import retrofit2.http.Path;
 
 public interface GitHubUserCall {
 
-    @GET("/orgs/{user}")
+    @GET("/users/{user}")
     Call<GitHubUser> getUser(@Path("user")String user);
 }

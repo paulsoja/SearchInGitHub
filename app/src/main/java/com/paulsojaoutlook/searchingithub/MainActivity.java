@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.paulsojaoutlook.searchingithub.fragment.SearchFragment;
+import com.paulsojaoutlook.searchingithub.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        SearchFragment searchFragment = new SearchFragment();
-        fragmentTransaction.replace(R.id.SearchFragmentContainer, searchFragment);
+        UserFragment userFragment = new UserFragment();
+        fragmentTransaction.replace(R.id.UserFragmentContainer, userFragment);
         fragmentTransaction.commit();
 
     }
