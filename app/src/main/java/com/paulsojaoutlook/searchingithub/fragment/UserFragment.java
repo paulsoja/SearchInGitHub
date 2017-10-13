@@ -134,7 +134,7 @@ public class UserFragment extends Fragment implements View.OnClickListener, Text
             if (isInternetConnected(getContext())) {
                 loadData();
             } else {
-                Toast.makeText(getContext(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.internet, Toast.LENGTH_SHORT).show();
             }
         }
     }
