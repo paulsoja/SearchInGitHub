@@ -69,8 +69,6 @@ public class UserFragment extends Fragment implements View.OnClickListener, Text
         layout.setVisibility(View.GONE);
         progressBar.setVisibility(ProgressBar.GONE);
 
-        setRetainInstance(true);
-
         return root;
     }
 
