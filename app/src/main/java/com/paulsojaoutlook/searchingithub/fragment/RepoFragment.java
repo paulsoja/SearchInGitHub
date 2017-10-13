@@ -49,15 +49,14 @@ public class RepoFragment extends Fragment {
         Bundle bundle = getArguments();
         companyName = bundle.getString(UserFragment.KEY_COMPANY_NAME);
         String numberRepo = bundle.getString(UserFragment.KEY_NUMBER_REPO);
-        userNameText.setText(companyName + " repositories (" + numberRepo + ")");
+        String text = companyName + " repositories (" + numberRepo + ")";
+        userNameText.setText(text);
 
         repoList = new ArrayList<>();
         adapter = new RepoAdapter(getContext(), repoList);
         listRepo.setAdapter(adapter);
 
         loadRepositiries();
-
-        setRetainInstance(true);
 
         return root;
     }

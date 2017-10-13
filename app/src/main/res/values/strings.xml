@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SearchInGithub</string>
+    <string name="search_hint">search</string>
+    <string name="internet">No Internet Connection!</string>
 </resources>
